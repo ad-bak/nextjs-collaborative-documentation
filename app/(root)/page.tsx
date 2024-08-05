@@ -1,5 +1,7 @@
 import AddDocumentBtn from "@/components/AddDocumentBtn";
+import { DeleteModal } from "@/components/DeleteModal";
 import Header from "@/components/Header";
+import Notifications from "@/components/Notifications";
 import { getDocuments } from "@/lib/actions/room.actions";
 import { dateConverter } from "@/lib/utils";
 import { SignedIn, UserButton } from "@clerk/nextjs";
@@ -20,7 +22,7 @@ async function Home() {
     <main className="home-container">
       <Header className="sticky left-0 top-0">
         <div className="flex items-center gap-2 lg:gap-4">
-          Notification
+          <Notifications />
           <SignedIn>
             <UserButton />
           </SignedIn>
@@ -45,6 +47,7 @@ async function Home() {
                       <p className="text-sm font-light text-blue-100">Created: {dateConverter(document.createdAt)}</p>
                     </div>
                   </Link>
+                  <DeleteModal roomId={document.id} />
                 </li>
               ))}
             </ul>
