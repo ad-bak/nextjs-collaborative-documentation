@@ -23,20 +23,20 @@ function CollaborativeRoom({ roomId, roomMetadata }: CollaborativeRoomProps) {
   const updateTitleHandler = async (e: React.KeyboardEvent<HTMLInputElement>) => {
     if (e.key === "Enter") {
       setLoading(true);
-    }
 
-    try {
-      if (documentTitle !== roomMetadata.title) {
-        const updatedDocument = await updateDocument(roomId, documentTitle);
+      try {
+        if (documentTitle !== roomMetadata.title) {
+          const updatedDocument = await updateDocument(roomId, documentTitle);
 
-        if (updatedDocument) {
-          setEditing(false);
+          if (updatedDocument) {
+            setEditing(false);
+          }
         }
+      } catch (error) {
+        console.log(`Error updating document title: ${error}`);
+      } finally {
+        setLoading(false);
       }
-    } catch (error) {
-      console.log(`Error updating document title: ${error}`);
-    } finally {
-      setLoading(false);
     }
   };
 
